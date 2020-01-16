@@ -2,5 +2,23 @@
 
 @foreach (var item in Model)
 {
-    @item.Snippet.Title<br/>
+    @item.Snippet.Title<br />
+
+    <img onclick="btnPlay('@item.Id.VideoId')" width="280" height="158" src="http://img.youtube.com/vi/@item.Id.VideoId/mqdefault.jpg" alt="@item.Snippet.Title">
+    <br />
+    <input id=i type="hidden" value="@item.Id.VideoId" />
+
+
+
+    <div class="btn-group-vertical" data-toggle="buttons">
+        <button type="button" class="btn btn-success" onclick="btnAdd('@Model')"> Agregar </button>
+    </div>
+    <br /><br />
 }
+
+<style>
+    button.btn-success 
+    {
+        left: 5px;
+    }
+</style>

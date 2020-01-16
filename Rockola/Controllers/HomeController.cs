@@ -23,18 +23,39 @@ namespace Rockola.Controllers
         {
             var ServicioYouTube = new YouTubeService(new BaseClientService.Initializer()
             {
-                ApiKey = "AIzaSyDOWDXSYml18hvagwa91sPt0nHhFkSpWnA",
+                ApiKey = "AIzaSyAACKrydm8xL3ILzJWFQy5vN4vXTNa8dN8",
                 ApplicationName = this.GetType().ToString()
             });
 
             var BuscarListaSolicitud = ServicioYouTube.Search.List("snippet");
             BuscarListaSolicitud.Q = palabra; //Buscador
-            BuscarListaSolicitud.MaxResults = 10;
+            BuscarListaSolicitud.MaxResults = 5;
 
             var BuscarListaRespuesta = BuscarListaSolicitud.Execute();
 
             return PartialView("Search", BuscarListaRespuesta.Items);
         }
+
+
+        [HttpGet]
+        public ActionResult AddToPlayList(Google.Apis.YouTube.v3.Data.SearchResult IdVideo)
+        {
+            return PartialView("AddPlay", IdVideo);
+        }
+
+        [HttpGet]
+        public ActionResult Play(string IdVideo)
+        {
+            return PartialView("Play", IdVideo);
+        }
+
+
+
+        SearchResultSnippet videoInfo = new SearchResultSnippet();
+        
+
+
+        #region
 
         public ActionResult About()
         {
@@ -49,5 +70,7 @@ namespace Rockola.Controllers
 
             return View();
         }
+
+        #endregion
     }
 }

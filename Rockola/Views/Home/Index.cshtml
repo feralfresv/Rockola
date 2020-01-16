@@ -2,33 +2,49 @@
     ViewBag.Title = "Home Page";
 }
 
-@*<div class="jumbotron">
-        <h1>ASP.NET</h1>
-        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-        <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-    </div>*@
 <br />
 <br />
 <div class="row">
+    <div id="play"></div><br />
     <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            <input type="text" class="form-control" id="txtkey" placeholder="Nombre" />
-        </p>
-
-        <p>
+        <div>
+            <h2>Buscador</h2>
+            <p><input type="text" class="form-control" id="txtkey" placeholder="Nombre" />        </p>
+            <p><a class="btn btn-default" href="javascript:void(0)" onclick="btnSearch()">Buscar Video</a></p>
             <br />
-            <a class="btn btn-default" href="javascript:void(0)" onclick="btnSearch()">Buscar Video</a>
-        </p>
-    </div>
-    <div class="col-md-4">
-        <div class="container" id="YoutubeLista">
+            @*<button onclick="myFunction('https://api.github.com/users/mralexgray/repos')">Try it</button>*@
 
+            <div class="list-group">
+                <div class="slideContainer" id="YoutubeLista"></div>
+            </div>
         </div>
     </div>
 </div>
 
+
+<style>
+    #play {
+        padding-top: 50px;  
+        position: relative;
+        float: right;
+    }    
+</style>
+
+
+
+
 <script>
+    function myFunction(YoutubeLista) {
+
+        $.get(url, function (btnSearch) {
+            var temp = btnSearch[0]
+            alert("Data Loaded: " + btnSearch);
+            alert("temp.id = " + temp.id);
+            alert("temp.Title = " + temp.T);
+        });
+    }
+
+
 
     function btnSearch()
     {
@@ -39,6 +55,25 @@
                 success: function (result) {
                     $('#YoutubeLista').html(result);
                     //respuesta
+                }
+            });
+    }
+
+        function btnAdd(Video) {
+        $.ajax(
+            {
+                url: '@Url.Action("AddToPlayList","Home")?IdVideo=' + Video,
+                type: 'GET'
+            });
+    }
+
+    function btnPlay(Id) {
+        $.ajax(
+            {
+                url: '@Url.Action("Play","Home")?IdVideo=' + Id,
+                type: 'GET',
+                success: function (result) {
+                    $('#play').html(result);
                 }
             });
     }
