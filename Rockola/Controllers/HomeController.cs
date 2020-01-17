@@ -11,7 +11,7 @@ namespace Rockola.Controllers
 {
     public class HomeController : Controller
     {
-
+        //pruebaa v1fdsfd
 
         public ActionResult Index()
         {
@@ -51,7 +51,6 @@ namespace Rockola.Controllers
 
 
 
-        SearchResultSnippet videoInfo = new SearchResultSnippet();
         
 
 
