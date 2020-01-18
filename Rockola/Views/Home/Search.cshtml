@@ -2,23 +2,70 @@
 
 @foreach (var item in Model)
 {
-    @item.Snippet.Title<br />
-
-    <img onclick="btnPlay('@item.Id.VideoId')" width="280" height="158" src="http://img.youtube.com/vi/@item.Id.VideoId/mqdefault.jpg" alt="@item.Snippet.Title">
-    <br />
-    <input id=i type="hidden" value="@item.Id.VideoId" />
-
-
-
-    <div class="btn-group-vertical" data-toggle="buttons">
-        <button type="button" class="btn btn-success" onclick="btnAdd('@Model')"> Agregar </button>
+<div class="row">
+    <div class="col-lg-4 col-md-4">
+        <a href="javascript:void(0);">
+            <img onclick="player.destroy();onYouTubeIframeAPIReady('@item.Id.VideoId');" class="img-responsive" src="http://img.youtube.com/vi/@item.Id.VideoId/mqdefault.jpg" alt="@item.Snippet.Title">
+        </a>
     </div>
-    <br /><br />
-}
+    <div class="list-group">
+        <p><strong>@item.Snippet.Title</strong></p>
+    </div>
+    <div>
+        <button type="button" class="btn btn-success" onclick="addToPlayList('@item.Id.VideoId','@item.Snippet.Thumbnails.Default__.Url');"><span class="glyphicon glyphicon-plus"></span> Agregar </button><br /><br /><br />    
+    </div>
+
+</div>
+
+}   
 
 <style>
-    button.btn-success 
-    {
-        left: 5px;
+    button.btn-success {
+        left: 1px;
     }
 </style>
+
+<script>
+    // 2. This code loads the IFrame Player API code asynchronously.
+    var tag = document.createElement('script');
+
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    // 3. This function creates an <iframe> (and YouTube player)
+    //    after the API code downloads.
+    var player;
+    function onYouTubeIframeAPIReady(VideoId = '3gf3L3AWwyI') {
+        player = new YT.Player('player', {
+            height: '360',
+            width: '640',
+            videoId: VideoId,
+            events: {
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange
+            }
+        });
+    }
+
+    // 4. The API will call this function when the video player is ready.
+    function onPlayerReady(event) {
+        event.target.playVideo();
+    }
+
+    // 5. The API calls this function when the player's state changes.
+    //    The function indicates that when playing a video (state=1),
+    //    the player should play for six seconds and then stop.
+    var done = false;
+    function onPlayerStateChange(event)
+    {
+        //if (event.data == YT.PlayerState.PLAYING && !done) {
+        //    setTimeout(stopVideo, 6000);
+        //    done = true;
+        //}
+    }
+    function stopVideo() {
+        player.stopVideo();
+    }
+</script>
+

@@ -5,45 +5,63 @@
 <br />
 <br />
 <div class="row">
-    <div id="play"></div><br />
+    <div id="player"></div><br />
     <div class="col-md-4">
         <div>
             <h2>Buscador</h2>
             <p><input type="text" class="form-control" id="txtkey" placeholder="Nombre" />        </p>
-            <p><a class="btn btn-default" href="javascript:void(0)" onclick="btnSearch()">Buscar Video</a></p>
-            <br />
-            @*<button onclick="myFunction('https://api.github.com/users/mralexgray/repos')">Try it</button>*@
-
+            <p><a class="btn btn-default" href="javascript:void(0)" onclick="btnSearch()">Buscar Video</a></p>   <br />
             <div class="list-group">
                 <div class="slideContainer" id="YoutubeLista"></div>
             </div>
         </div>
     </div>
 </div>
+<h2>Album</h2>
+<div class="control-group row col-lg-13 mt-3 table-bordered bg-dark" id="playList" style="height:200px;">
+    <div>
+        <img onclick="btnPlay()" class="mt-3" id="img" /> <br />
+    </div>
+</div>
+
 
 
 <style>
-    #play {
-        padding-top: 50px;  
-        position: relative;
+    #player {
+        padding-top: 50px;
         float: right;
-    }    
+        border: 1px solid #D2D2D2;
+        position: fixed;
+        min-height: 315px;
+        width: 560px;
+        right: calc(50% - 500px);
+        /*margin-bottom: 10px;
+        margin-right: 10px;*/
+        /*overflow: hidden;
+        text-align: right;*/
+    }
+    /*#player {
+        /*padding-top: 200px;*/
+        /*position: relative;
+        float: right;*/
+        border: 1px solid #D2D2D2;
+        /*border-radius: 8px 8px 8px 8px;*/
+        /*float: left;*/
+        /* para mantener visible un elemento en todo momento aunque se haga scroll en la página */
+        position: fixed;
+        min-height: 225px;
+        margin-bottom: 300px;
+        margin-right: 300px;
+        overflow: hidden;
+        text-align: right;
+        width: 200px;
+    }*/
 </style>
 
 
 
 
 <script>
-    function myFunction(YoutubeLista) {
-
-        $.get(url, function (btnSearch) {
-            var temp = btnSearch[0]
-            alert("Data Loaded: " + btnSearch);
-            alert("temp.id = " + temp.id);
-            alert("temp.Title = " + temp.T);
-        });
-    }
-
 
 
     function btnSearch()
@@ -59,13 +77,28 @@
             });
     }
 
-        function btnAdd(Video) {
-        $.ajax(
-            {
-                url: '@Url.Action("AddToPlayList","Home")?IdVideo=' + Video,
-                type: 'GET'
-            });
-    }
+    function addToPlayList(videoId,videoImageURL)
+    {
+        
+        //    //Agregar a playlist
+            playListContainer = document.getElementById('playList');
+        //    var img = document.createElement('img');
+        //    img.src = videoImageURL;
+        //    img.alt = videoId;
+        //    img.classList = "table-bordered border-danger rounded mx-2 mt-2 mb-2";
+        //    img.width = 190;
+        //playListContainer.append(img);
+
+   
+
+        var img = document.getElementById('img');
+        img.src = videoImageURL;
+        img.alt = videoId;
+        img.classList = "table-bordered border-danger rounded mx-2 mt-2 mb-2";
+        img.width = 190;
+        playListContainer.append(img);
+       
+    }   
 
     function btnPlay(Id) {
         $.ajax(

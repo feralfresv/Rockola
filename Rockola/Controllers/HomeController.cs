@@ -25,7 +25,7 @@ namespace Rockola.Controllers
         {
             var ServicioYouTube = new YouTubeService(new BaseClientService.Initializer()
             {
-                ApiKey = "AIzaSyAACKrydm8xL3ILzJWFQy5vN4vXTNa8dN8",
+                ApiKey = "AIzaSyC6FD04_DRygnZnvqPNvxJLhpFl3tkFto8",
                 ApplicationName = this.GetType().ToString()
             });
 
@@ -40,9 +40,22 @@ namespace Rockola.Controllers
 
 
         [HttpGet]
-        public ActionResult AddToPlayList(Google.Apis.YouTube.v3.Data.SearchResult IdVideo)
+        public ActionResult AddToPlayList(string IdVideo)
         {
-            return PartialView("AddPlay", IdVideo);
+            Declare();
+            List<string> ListVideosId = (List<string>)Session["Playlist"];
+            ListVideosId.Add(IdVideo);
+            Session["Playlist"] = ListVideosId;
+            return PartialView("Playlist", ListVideosId);
+        }
+
+        public void Declare()
+        {
+            List<string> PlayListIds = new List<string>();
+            if (Session["Playlist"] == null)
+            {
+                Session["Playlist"] = PlayListIds;
+            }
         }
 
         [HttpGet]
