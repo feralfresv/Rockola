@@ -30,24 +30,15 @@
     #player {
         padding-top: 50px;
         float: right;
-        /*border: 1px solid #D2D2D2;*/
         position: fixed;
         min-height: 315px;
         width: 560px;
         right: calc(50% - 500px);
-        /*margin-bottom: 10px;
-        margin-right: 10px;*/
-        /*overflow: hidden;
-        text-align: right;*/
     }
-
 </style>
 
 
-
-
 <script>
-
 
     function btnSearch()
     {
@@ -57,33 +48,46 @@
                 type: 'GET',
                 success: function (result) {
                     $('#YoutubeLista').html(result);
-                    //respuesta
                 }
             });
     }
 
-    function addToPlayList(videoId,videoImageURL)
-    {
-        
-        //    //Agregar a playlist
+    function addToPlayList(videoId, videoImageURL) {
+        if (band)
+        {
+            //Agregar a playlist
             playListContainer = document.getElementById('playList');
-        //    var img = document.createElement('img');
-        //    img.src = videoImageURL;
-        //    img.alt = videoId;
-        //    img.classList = "table-bordered border-danger rounded mx-2 mt-2 mb-2";
-        //    img.width = 190;
-        //playListContainer.append(img);
+            var img = document.createElement('img');
+            img.src = videoImageURL;
+            img.alt = videoId;
+            img.classList = "table-bordered border-danger rounded mx-2 mt-2 mb-2";
+            img.width = 190;
+            playListContainer.append(img);
+        } else {
+            player.destroy();
+            onYouTubeIframeAPIReady(videoId);
+        }
+    }
 
-   
+    function HideShowPlayList() {
+        playListContainer = document.getElementById('playList');
+        if (playListContainer.children.length == 0) {
+            $('#BlockPlaylist').hide();
+            console.log('cero');
+        }
+        else {
+            console.log('no es cero')
+            $('#BlockPlaylist').show();
+        }
+    }
 
-        var img = document.getElementById('img');
-        img.src = videoImageURL;
-        img.alt = videoId;
-        img.classList = "table-bordered border-danger rounded mx-2 mt-2 mb-2";
-        img.width = 190;
-        playListContainer.append(img);
-       
-    }   
+    function playQueue() {
+        var firstVideo = playListContainer.children[0];
+        var videoId = firstVideo.alt;
+        firstVideo.remove();
+        player.destroy();
+        onYouTubeIframeAPIReady(videoId);
+    }
 
     function btnPlay(Id) {
         $.ajax(
