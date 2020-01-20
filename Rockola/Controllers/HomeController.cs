@@ -11,9 +11,9 @@ namespace Rockola.Controllers
 {
     public class HomeController : Controller
     {
-        //pruebaa v1
-        //prueba v2
-        //prueba v3
+        //pruebaa v1 git
+        //prueba v2 git
+        //prueba v3 git
 
         public ActionResult Index()
         {
@@ -37,38 +37,7 @@ namespace Rockola.Controllers
 
             return PartialView("Search", BuscarListaRespuesta.Items);
         }
-
-
-        [HttpGet]
-        public ActionResult AddToPlayList(string IdVideo)
-        {
-            Declare();
-            List<string> ListVideosId = (List<string>)Session["Playlist"];
-            ListVideosId.Add(IdVideo);
-            Session["Playlist"] = ListVideosId;
-            return PartialView("Playlist", ListVideosId);
-        }
-
-        public void Declare()
-        {
-            List<string> PlayListIds = new List<string>();
-            if (Session["Playlist"] == null)
-            {
-                Session["Playlist"] = PlayListIds;
-            }
-        }
-
-        [HttpGet]
-        public ActionResult Play(string IdVideo)
-        {
-            return PartialView("Play", IdVideo);
-        }
-
-
-
-        
-
-
+  
         #region
 
         public ActionResult About()

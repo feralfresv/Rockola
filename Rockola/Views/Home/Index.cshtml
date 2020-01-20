@@ -7,21 +7,16 @@
 <div class="row">
     <div id="player"></div><br />
     <div class="col-md-4">
-        <div>
             <h2>Buscador</h2>
             <p><input type="text" class="form-control" id="txtkey" placeholder="Nombre" />        </p>
             <p><a class="btn btn-default" href="javascript:void(0)" onclick="btnSearch()">Buscar Video</a></p>   <br />
             <div class="list-group">
                 <div class="slideContainer" id="YoutubeLista"></div>
             </div>
-        </div>
     </div>
 </div>
 <h2>Album</h2>
 <div class="control-group row col-lg-13 mt-3 table-bordered bg-dark" id="playList" style="height:200px;">
-    <div>
-        <img onclick="btnPlay()" class="mt-3" id="img" /> <br />
-    </div>
 </div>
 
 
@@ -55,7 +50,6 @@
     function addToPlayList(videoId, videoImageURL) {
         if (band)
         {
-            //Agregar a playlist
             playListContainer = document.getElementById('playList');
             var img = document.createElement('img');
             img.src = videoImageURL;
@@ -89,14 +83,4 @@
         onYouTubeIframeAPIReady(videoId);
     }
 
-    function btnPlay(Id) {
-        $.ajax(
-            {
-                url: '@Url.Action("Play","Home")?IdVideo=' + Id,
-                type: 'GET',
-                success: function (result) {
-                    $('#play').html(result);
-                }
-            });
-    }
 </script>
