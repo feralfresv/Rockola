@@ -2,6 +2,7 @@
     padding-top: 25px;
     padding-bottom: 20px;
     background: url(..//fondo.png);
+    background-attachment: fixed;
 }
 
 /* Set padding to keep content from hitting the edges */

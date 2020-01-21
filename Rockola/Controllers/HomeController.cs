@@ -25,7 +25,7 @@ namespace Rockola.Controllers
         {
             var ServicioYouTube = new YouTubeService(new BaseClientService.Initializer()
             {
-                ApiKey = "AIzaSyA6F3R_kIdjAu7s1i7O7DwMxrvtwbpL1J8",
+                ApiKey = "AIzaSyCENuuzGXhwKTvQVsuG0HyhEYW9DWuXGPg",
                 ApplicationName = this.GetType().ToString()
             });
 
