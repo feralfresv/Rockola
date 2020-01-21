@@ -6,34 +6,71 @@
 <br />
 <div class="row">
     <div id="player"></div><br />
-    <div class="col-md-4">
-            <h2>Buscador</h2>
-            <p><input type="text" class="form-control" id="txtkey" placeholder="Nombre" />        </p>
-            <p><a class="btn btn-default" href="javascript:void(0)" onclick="btnSearch()">Buscar Video</a></p>   <br />
-            <div class="list-group">
-                <div class="slideContainer" id="YoutubeLista"></div>
-            </div>
+    <h2><font color="#ffffff">Buscador</font></h2>
+    <div class="pull-left">
+        <input type="text" class="form-control" id="txtkey" placeholder="Nombre" />
     </div>
-</div>
-<h2>Album</h2>
+    <div>
+        <div class="input-group">
+            <a id="buttonB" class="btn btn-primary btn-lg" href="javascript:void(0)" onclick="btnSearch()"><span class="glyphicon glyphicon-search"></span> Buscar Video</a>
+        </div>
+    </div>
+    <p></p>   <br />
+
+
+
+    <div class="col-md-4">
+        <div class="list-group">
+            <div class="slideContainer" id="YoutubeLista"></div>
+        </div>
+    </div>
+</div><br /><br />
+<h2><font color="#ffffff">Album</font></h2>
 <div class="control-group row col-lg-13 mt-3 table-bordered bg-dark" id="playList" style="height:200px;">
 </div>
 
 
 
 <style>
+    #YoutubeLista {
+        color: white;
+    }
+
+    #playList {
+        border-color: lightseagreen;
+        border-width: 5px;
+        border-radius: 15px;
+    }
+
+    #txtkey {
+        height: 47px;
+        width: 500px;
+        font-style: oblique;
+        font-size: 15px;
+        margin: 5px;
+        border-radius: 15px;
+    }
+
+    #buttonB {
+        height: 40px;
+        font-size: 15px;
+        margin: 7.5px;
+    }
+
     #player {
-        padding-top: 50px;
+        padding-top: 45px;
         float: right;
         position: fixed;
-        min-height: 315px;
+        height: 315px;
         width: 560px;
-        right: calc(50% - 500px);
+        right: calc(47.5% - 500px);
     }
 </style>
 
 
 <script>
+
+
 
     function btnSearch()
     {

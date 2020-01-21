@@ -3,18 +3,20 @@
 @foreach (var item in Model)
 {
     <div class="row">
-        <div class="col-lg-4 col-md-4">
+        <div class="col-lg-7 col-md-7">
             <a href="javascript:void(0);">
                 <img onclick="player.destroy();onYouTubeIframeAPIReady('@item.Id.VideoId');" class="img-responsive" src="http://img.youtube.com/vi/@item.Id.VideoId/mqdefault.jpg" alt="@item.Snippet.Title">
             </a>
+            <div class="list-group">
+                <p><strong>@item.Snippet.Title</strong></p>
+            </div>
         </div>
-        <div class="list-group">
-            <p><strong>@item.Snippet.Title</strong></p>
-        </div>
+
+
         <div>
             <button type="button" class="btn btn-success" onclick="addToPlayList('@item.Id.VideoId','@item.Snippet.Thumbnails.Default__.Url');"><span class="glyphicon glyphicon-plus"></span> Agregar </button><br /><br /><br />
         </div>
-    </div>
+    </div>  
 
 }
 
