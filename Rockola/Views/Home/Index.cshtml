@@ -14,9 +14,10 @@
     </div>
 </div><br /><br />
 
-<h2 id="album"><font color="#ffffff">Album</font></h2>
+<div id="playList"></div>
+@*<h2 id="album"><font color="#ffffff">Album</font></h2>
 <div class="control-group row col-lg-13 mt-3 table-bordered bg-dark" id="playList" style="height:200px;">
-</div>
+</div>*@
 
 
 
@@ -50,8 +51,8 @@
         padding-top: 45px;
         float: right;
         position: fixed;
-        height: 315px;
-        width: 560px;
+        height: 380px;
+        width: 580px;
         right: calc(47.5% - 500px);
     }
 </style>
@@ -77,12 +78,6 @@
                     $('#YoutubeLista').html(result);
                 }
             });
-            //    $.ajax(
-            //{
-            //    success: function (result) {
-            //        $('#playList').html(result);
-            //    }
-            //});
     }
 
     function addToPlayList(videoId, videoImageURL) {
