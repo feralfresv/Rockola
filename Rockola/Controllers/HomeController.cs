@@ -23,19 +23,23 @@ namespace Rockola.Controllers
         [HttpGet]
         public ActionResult BuscarLista(string palabra)
         {
-            var ServicioYouTube = new YouTubeService(new BaseClientService.Initializer()
-            {
-                ApiKey = "AIzaSyCENuuzGXhwKTvQVsuG0HyhEYW9DWuXGPg",
-                ApplicationName = this.GetType().ToString()
-            });
 
-            var BuscarListaSolicitud = ServicioYouTube.Search.List("snippet");
-            BuscarListaSolicitud.Q = palabra; //Buscador
-            BuscarListaSolicitud.MaxResults = 5;
+            ServiceReference1.Service1Client obj = new ServiceReference1.Service1Client();
+            return PartialView("Search", obj.BuscarLista(palabra).ToList());
+            //return PartialView("Search", obj.BuscarLista(palabra).ToList());
 
-            var BuscarListaRespuesta = BuscarListaSolicitud.Execute();
+            //var ServicioYouTube = new YouTubeService(new BaseClientService.Initializer()
+            //{
+            //    ApiKey = "AIzaSyCENuuzGXhwKTvQVsuG0HyhEYW9DWuXGPg",
+            //    ApplicationName = this.GetType().ToString()
+            //});
 
-            return PartialView("Search", BuscarListaRespuesta.Items);
+            //var BuscarListaSolicitud = ServicioYouTube.Search.List("snippet");
+            //BuscarListaSolicitud.Q = palabra; //Buscador
+            //BuscarListaSolicitud.MaxResults = 5;
+
+            //var BuscarListaRespuesta = BuscarListaSolicitud.Execute();
+            //return PartialView("Search", BuscarListaRespuesta.Items);
         }
   
         #region
