@@ -49,6 +49,8 @@ namespace Rockola.Controllers
         //    //    //return PartialView("Search", BuscarListaRespuesta.Items);
         //    }
         #endregion
+
+
         [HttpGet]
         public ActionResult BuscarLista(string palabra)
         {
