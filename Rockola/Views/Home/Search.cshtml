@@ -1,23 +1,27 @@
-﻿@model List<Google.Apis.YouTube.v3.Data.SearchResult>
+﻿@*@model List<Rockola.ServiceReference1.SearchResultModified>*@
+
+@model List<Rockola.Models.SearchResultCustomized>
+
+
 
 @foreach (var item in Model)
 {
-<div class="row">
-    <div class="col-lg-4 col-md-4">
-        <a href="javascript:void(0);">
-            <img onclick="player.destroy();onYouTubeIframeAPIReady('@item.Id.VideoId');" class="img-responsive" src="http://img.youtube.com/vi/@item.Id.VideoId/mqdefault.jpg" alt="@item.Snippet.Title">
-        </a>
-    </div>
-    <div class="list-group">
-        <p><strong>@item.Snippet.Title</strong></p>
-    </div>
-    <div>
-        <button type="button" class="btn btn-success" onclick="addToPlayList('@item.Id.VideoId','@item.Snippet.Thumbnails.Default__.Url');"><span class="glyphicon glyphicon-plus"></span> Agregar </button><br /><br /><br />    
+    <div class="row">
+        <div class="col-lg-7 col-md-7">
+            <a href="javascript:void(0);">
+                <img onclick="player.destroy();onYouTubeIframeAPIReady('@item.VideoId');" class="img-responsive" src="http://img.youtube.com/vi/@item.VideoId/mqdefault.jpg" alt="@item.Title">
+            </a>
+            <div class="list-group">
+                <p><strong>@item.Title</strong></p>
+            </div>
+        </div>
+        <div>
+            <button type="button" class="btn btn-success" onclick="addToPlayList('@item.VideoId','@item.ImageUrl');"><span class="glyphicon glyphicon-plus"></span> Agregar </button><br /><br /><br />
+        </div>
     </div>
 
-</div>
+}
 
-}   
 
 <style>
     button.btn-success {
@@ -25,7 +29,9 @@
     }
 </style>
 
+
 <script>
+
     // 2. This code loads the IFrame Player API code asynchronously.
     var tag = document.createElement('script');
 
@@ -36,9 +42,15 @@
     // 3. This function creates an <iframe> (and YouTube player)
     //    after the API code downloads.
     var player;
-    function onYouTubeIframeAPIReady(VideoId = '3gf3L3AWwyI') {
+    var playListContainer;
+    var band = false;
+
+    function onYouTubeIframeAPIReady(VideoId) {
+        if (VideoId == null) {
+            VideoId = '3gf3L3AWwyI';
+        }
         player = new YT.Player('player', {
-            height: '360',
+            height: '390',
             width: '640',
             videoId: VideoId,
             events: {
@@ -56,14 +68,25 @@
     // 5. The API calls this function when the player's state changes.
     //    The function indicates that when playing a video (state=1),
     //    the player should play for six seconds and then stop.
+
     var done = false;
-    function onPlayerStateChange(event)
-    {
-        //if (event.data == YT.PlayerState.PLAYING && !done) {
-        //    setTimeout(stopVideo, 6000);
-        //    done = true;
-        //}
+    function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.PLAYING) {
+            band = true;
+        } else if (event.data == YT.PlayerState.PAUSED) {
+            band = false;
+        }
+        console.log(event.data);
+
+
+        if (event.data == YT.PlayerState.ENDED && !done) {
+            playListContainer = document.getElementById('playList');
+            //var nextVideoToPlay = playListContainer.children[0];
+            videoStopped = true;
+            playQueue();
+        }
     }
+
     function stopVideo() {
         player.stopVideo();
     }
