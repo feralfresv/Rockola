@@ -95,3 +95,5 @@ C:\Users\Curso\source\repos\Academia_Softtek\Rockola\Rockola\obj\Debug\Rockola.c
 C:\Users\Curso\source\repos\Academia_Softtek\Rockola\Rockola\obj\Debug\Rockola.csproj.CopyComplete
 C:\Users\Curso\source\repos\Academia_Softtek\Rockola\Rockola\obj\Debug\Rockola.dll
 C:\Users\Curso\source\repos\Academia_Softtek\Rockola\Rockola\obj\Debug\Rockola.pdb
+C:\Users\Curso\source\repos\Academia_Softtek\Rockola\Rockola\bin\System.Net.Http.Formatting.dll
+C:\Users\Curso\source\repos\Academia_Softtek\Rockola\Rockola\bin\System.Net.Http.Formatting.xml
