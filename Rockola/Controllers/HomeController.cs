@@ -15,9 +15,7 @@ namespace Rockola.Controllers
 {
     public class HomeController : Controller
     {
-        //pruebaa v1 git
-        //prueba v2 git
-        //prueba v3 git
+   //merge ejemplo
 
         public ActionResult Index()
         {
