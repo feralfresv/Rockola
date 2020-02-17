@@ -51,12 +51,15 @@
 </body>
 </html>
 
+
 <script>
-    //var input = document.getElementById("txtkey");
-    //input.addEventListener("keyup", function (event) {
-    //    if (event.keyCode === 13) {
-    //        event.preventDefault();
-    //        document.getElementById("buttonB").click();
-    //    }
-    //});
+    var video;
+    $.ajax({
+        url: "http://localhost:55869/api/YT_API",
+        data: video,    
+        dataType: "json",
+        success: function (result) {
+            console.info(result);
+        }
+    });
 </script>

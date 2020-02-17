@@ -15,50 +15,50 @@
 </div><br /><br />
 
 <div id="playList"></div>
-@*<h2 id="album"><font color="#ffffff">Album</font></h2>
-<div class="control-group row col-lg-13 mt-3 table-bordered bg-dark" id="playList" style="height:200px;">
-</div>*@
+
+<div id="addToHisory"></div>
 
 
+    <style>
+        #YoutubeLista {
+            color: white;
+        }
 
-<style>
-    #YoutubeLista {
-        color: white;
-    }
+        #playList {
+            border-color: lightseagreen;
+            border-width: 5px;
+            border-radius: 15px;
+        }
 
-    #playList {
-        border-color: lightseagreen;
-        border-width: 5px;
-        border-radius: 15px;
-    }
+        #txtkey {
+            height: 40px;
+            width: 500px;
+            font-style: oblique;
+            font-size: 15px;
+            margin: 5px;
+            border-radius: 15px;
+        }
 
-    #txtkey {
-        height: 40px;
-        width: 500px;
-        font-style: oblique;
-        font-size: 15px;
-        margin: 5px;
-        border-radius: 15px;
-    }
+        #buttonB {
+            height: 38px;
+            font-size: 15px;
+            margin: 7.5px;
+        }
 
-    #buttonB {
-        height: 38px;
-        font-size: 15px;
-        margin: 7.5px;
-    }
+        #player {
+            padding-top: 45px;
+            float: right;
+            position: fixed;
+            height: 380px;
+            width: 580px;
+            right: calc(47.5% - 500px);
+        }
+    </style>
 
-    #player {
-        padding-top: 45px;
-        float: right;
-        position: fixed;
-        height: 380px;
-        width: 580px;
-        right: calc(47.5% - 500px);
-    }
-</style>
 
 
 <script>
+//Button Enter el Buscador
     var input = document.getElementById("txtkey");
     input.addEventListener("keyup", function (event) {
         if (event.keyCode === 13) {
@@ -67,53 +67,66 @@
         }
     });
 
-
     function btnSearch()
     {
         $.ajax(
-            {
-                url: '@Url.Action("BuscarLista")?palabra=' + $('#txtkey').val(),
-                type: 'GET',
-                success: function (result) {
-                    $('#YoutubeLista').html(result);
-                }
-            });
+        {
+            url: '@Url.Action("BuscarLista")?palabra=' + $('#txtkey').val(),
+            type: 'GET',
+            success: function (result) {
+                $('#YoutubeLista').html(result);
+            }
+        });
     }
 
-    function addToPlayList(videoId, videoImageURL) {
+    function addToPlayList(videoId, videoImageURL, Title)
+    {    
         if (band)
         {
             playListContainer = document.getElementById('playList');
             var img = document.createElement('img');
             img.src = videoImageURL;
             img.alt = videoId;
+            img.title = Title;
             img.classList = "table-bordered border-danger rounded mx-2 mt-2 mb-2";
             img.width = 190;
             playListContainer.append(img);
-        } else {
+        }
+        else
+        {
             player.destroy();
             onYouTubeIframeAPIReady(videoId);
         }
     }
 
-    function HideShowPlayList() {
-        playListContainer = document.getElementById('playList');
-        if (playListContainer.children.length == 0) {
-            $('#BlockPlaylist').hide();
-            console.log('cero');
-        }
-        else {
-            console.log('no es cero')
-            $('#BlockPlaylist').show();
-        }
-    }
-
-    function playQueue() {
+    function playQueue()
+    {
         var firstVideo = playListContainer.children[0];
         var videoId = firstVideo.alt;
+        var Title = firstVideo.title;
+        var videoImageURL = firstVideo.src;
+
         firstVideo.remove();
         player.destroy();
         onYouTubeIframeAPIReady(videoId);
+
+        var video =
+        {
+            "title": Title,
+            "IdYoutube": videoId,
+            "url": videoImageURL
+        }
+        console.log(video);
+        $.ajax
+            ({
+                type: "POST",
+                dataType: "json",
+                url: "http://localhost:55869/api/YT_API",
+                data: video,
+                success: function (result) {
+                    console.info(result);
+                }
+            })
     }
 
 </script>
